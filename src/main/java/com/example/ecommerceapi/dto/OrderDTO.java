@@ -1,0 +1,21 @@
+package com.example.ecommerceapi.dto;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+/**
+ * @author Thrimal Avishka <thrimalavishka99@gmail.com>
+ * @since 28-Jul-23
+ */
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class OrderDTO {
+    private Long orderId;
+    private String date;
+    private String duration;
+    private double subTotal;
+    private CustomerDTO customerDTO;
+    private CartDTO cartDTO;
+}
