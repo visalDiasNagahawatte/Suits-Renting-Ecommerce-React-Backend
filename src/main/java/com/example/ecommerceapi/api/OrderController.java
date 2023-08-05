@@ -1,7 +1,5 @@
 package com.example.ecommerceapi.api;
 
-import com.example.ecommerceapi.dto.LineItemDTO;
-import com.example.ecommerceapi.dto.LineItemDetailsDTO;
 import com.example.ecommerceapi.dto.OrderDTO;
 import com.example.ecommerceapi.service.LineItemService;
 import com.example.ecommerceapi.service.OrderService;
@@ -36,7 +34,7 @@ public class OrderController {
 
     @GetMapping
     public ResponseEntity<StandardResponse> getAllLineItems() {
-        List<LineItemDetailsDTO> allLineItems = lineItemService.getLineItemsDetails();
+        List<Object[]> allLineItems = lineItemService.getLineItemsDetails();
         return new ResponseEntity<>(new StandardResponse(200, "Success...", allLineItems), HttpStatus.OK);
     }
 }

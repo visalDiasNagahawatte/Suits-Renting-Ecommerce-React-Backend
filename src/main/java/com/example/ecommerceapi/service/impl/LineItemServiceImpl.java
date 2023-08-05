@@ -1,7 +1,6 @@
 package com.example.ecommerceapi.service.impl;
 
 import com.example.ecommerceapi.dto.LineItemDTO;
-import com.example.ecommerceapi.dto.LineItemDetailsDTO;
 import com.example.ecommerceapi.entity.LineItem;
 import com.example.ecommerceapi.repo.CartRepo;
 import com.example.ecommerceapi.repo.LineItemsRepo;
@@ -52,7 +51,7 @@ public class LineItemServiceImpl implements LineItemService {
     }
 
     @Override
-    public List<LineItemDetailsDTO> getLineItemsDetails(){
+    public List<Object[]> getLineItemsDetails() {
         return lineItemsRepo.getLineItemsDetails();
     }
 }
