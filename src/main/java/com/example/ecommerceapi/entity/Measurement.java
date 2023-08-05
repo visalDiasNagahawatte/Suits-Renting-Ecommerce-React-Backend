@@ -1,5 +1,6 @@
 package com.example.ecommerceapi.entity;
 
+import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,6 +20,7 @@ public class Measurement implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long measurementId;
+    @NotNull
     private Long customerId;
     private String waistSize;
     private String hipSize;

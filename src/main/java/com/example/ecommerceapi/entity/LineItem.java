@@ -1,5 +1,6 @@
 package com.example.ecommerceapi.entity;
 
+import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,11 +20,14 @@ public class LineItem implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long lineItemId;
-    private int quantity;
-    private double totalPrice;
-    private Long orderId;
-    private Long productId;
     private Long cartId;
+    private Long orderId;
+    @NotNull
+    private Long productId;
+    @NotNull
+    private int quantity;
+    @NotNull
+    private double totalPrice;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "orderId", referencedColumnName = "orderId", insertable = false, updatable = false)

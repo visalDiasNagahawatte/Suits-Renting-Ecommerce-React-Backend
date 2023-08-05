@@ -23,25 +23,25 @@ public class CategoryController {
     private CategoryService service;
 
     @PostMapping
-    public ResponseEntity<StandardResponse> addCategory(@RequestBody CategoryDTO categoryDTO){
+    public ResponseEntity<StandardResponse> addCategory(@RequestBody CategoryDTO categoryDTO) {
         boolean b = service.addCategory(categoryDTO);
-        return new ResponseEntity<>(new StandardResponse(201,"Success",b), HttpStatus.CREATED);
+        return new ResponseEntity<>(new StandardResponse(201, "Success", b), HttpStatus.CREATED);
     }
 
-    @PutMapping
-    public ResponseEntity<StandardResponse> updateCategory(@RequestBody CategoryDTO categoryDTO, String title){
-        boolean b = service.updateCategory(categoryDTO,title);
-        return new ResponseEntity<>(new StandardResponse(204,"Success",b),HttpStatus.OK);
+    @PutMapping(params = {"description"})
+    public ResponseEntity<StandardResponse> updateCategory(@RequestBody CategoryDTO categoryDTO, @RequestParam String description) {
+        boolean b = service.updateCategory(categoryDTO, description);
+        return new ResponseEntity<>(new StandardResponse(204, "Success", b), HttpStatus.OK);
     }
 
     @DeleteMapping(params = {"description"})
-    public ResponseEntity<StandardResponse> deleteCategory(@RequestParam String description){
+    public ResponseEntity<StandardResponse> deleteCategory(@RequestParam String description) {
         String s = service.deleteCategory(description);
-        return new ResponseEntity<>(new StandardResponse(203,"Success",s),HttpStatus.OK);
+        return new ResponseEntity<>(new StandardResponse(203, "Success", s), HttpStatus.OK);
     }
 
     @GetMapping(value = "/find", params = {"description"})
-    public ResponseEntity<StandardResponse> findCategory(@RequestParam String description){
+    public ResponseEntity<StandardResponse> findCategory(@RequestParam String description) {
         CategoryDTO category = service.findCategory(description);
         return new ResponseEntity<>(new StandardResponse(200,"Success",category),HttpStatus.OK);
     }

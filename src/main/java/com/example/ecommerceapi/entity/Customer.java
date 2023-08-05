@@ -33,4 +33,7 @@ public class Customer implements Serializable {
     @Column(unique = true)
     private String contact;
     private String extra;
+
+//    @OneToOne(mappedBy = "customer")
+//    private Measurement measurement;
 }

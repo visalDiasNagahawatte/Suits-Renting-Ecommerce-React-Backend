@@ -20,6 +20,7 @@ public class Cart implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long cartId;
     private Long orderId;
+
     @OneToOne//(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "orderId", referencedColumnName = "orderId", insertable = false, updatable = false)
     private Orders orders;

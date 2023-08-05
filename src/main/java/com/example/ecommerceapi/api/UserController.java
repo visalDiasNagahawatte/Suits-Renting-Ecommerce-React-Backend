@@ -40,7 +40,7 @@ public class UserController {
         return new ResponseEntity<StandardResponse>(new StandardResponse(200, "Success...", userDTO), HttpStatus.OK);
     }
 
-    @PutMapping
+    @PutMapping(params = {"curEmail"})
     public ResponseEntity<StandardResponse> updateUser(@RequestBody UserDTO userDTO, @RequestParam String curEmail){
         boolean b = userService.updateUser(userDTO, curEmail);
         return new ResponseEntity<StandardResponse>(new StandardResponse(204, "Success...",b),HttpStatus.OK);
