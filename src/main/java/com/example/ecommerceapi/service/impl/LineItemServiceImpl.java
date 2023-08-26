@@ -46,7 +46,7 @@ public class LineItemServiceImpl implements LineItemService {
             System.out.println("line items ok");
             return true;
         } else {
-            throw new RuntimeException("Invalid inputs...");
+            throw new IllegalArgumentException("Invalid inputs...");
         }
     }
 

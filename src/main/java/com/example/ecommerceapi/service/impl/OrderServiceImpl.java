@@ -2,6 +2,7 @@ package com.example.ecommerceapi.service.impl;
 
 import com.example.ecommerceapi.dto.OrderDTO;
 import com.example.ecommerceapi.entity.Orders;
+import com.example.ecommerceapi.exception.UserNotFoundException;
 import com.example.ecommerceapi.repo.CustomerRepo;
 import com.example.ecommerceapi.repo.OrderRepo;
 import com.example.ecommerceapi.service.CartService;
@@ -47,10 +48,10 @@ public class OrderServiceImpl implements OrderService {
                 cartService.saveCart(orderDTO.getCartDTO());
                 return true;
             } else {
-                throw new RuntimeException("Customer not exists...");
+                throw new UserNotFoundException("Customer not exists...");
             }
         } else {
-            throw new RuntimeException("Invalid inputs...");
+            throw new IllegalArgumentException("Invalid inputs...");
         }
     }
 }

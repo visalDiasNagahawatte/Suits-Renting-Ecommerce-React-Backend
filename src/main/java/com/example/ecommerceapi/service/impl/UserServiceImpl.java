@@ -2,6 +2,7 @@ package com.example.ecommerceapi.service.impl;
 
 import com.example.ecommerceapi.dto.UserDTO;
 import com.example.ecommerceapi.entity.User;
+import com.example.ecommerceapi.exception.*;
 import com.example.ecommerceapi.repo.UserRepo;
 import com.example.ecommerceapi.service.UserService;
 import com.example.ecommerceapi.utill.PasswordEncoder;
@@ -35,10 +36,10 @@ public class UserServiceImpl implements UserService {
                 userRepo.save(modelMapper.map(userDTO, User.class));
                 return true;
             } else {
-                throw new RuntimeException("email is already exists...");
+                throw new EntryDuplicateException("email is already exists...");
             }
         } else {
-            throw new RuntimeException("Invalid inputs...");
+            throw new IllegalArgumentException("Invalid inputs...");
         }
     }
 
@@ -51,10 +52,10 @@ public class UserServiceImpl implements UserService {
                 userDTO.setPassword(null);
                 return userDTO;
             } else {
-                throw new RuntimeException("User not found...");
+                throw new UserNotFoundException("User not found...");
             }
         } else {
-            throw new RuntimeException("Invalid inputs...");
+            throw new EntryNotFoundException("Invalid inputs...");
         }
 
     }
@@ -69,13 +70,13 @@ public class UserServiceImpl implements UserService {
                 if (hashedPassword.equals(user.getPassword())) {
                     return true;
                 } else {
-                    throw new RuntimeException("Invalid password. Please enter a valid password.");
+                    throw new UnAuthorizedException("Invalid password. Please enter a valid password.");
                 }
             } else {
-                throw new RuntimeException("Invalid email. Please enter a valid email.");
+                throw new EntryNotFoundException("Invalid email. Please enter a valid email.");
             }
         } else {
-            throw new RuntimeException("Please enter a valid email and password.");
+            throw new ValidationException("Please enter a valid email and password.");
         }
     }
 
@@ -91,10 +92,10 @@ public class UserServiceImpl implements UserService {
                 userRepo.save(user);
                 return true;
             } else {
-                throw new RuntimeException("User not found...");
+                throw new UserNotFoundException("User not found...");
             }
         } else {
-            throw new RuntimeException("Invalid inputs...");
+            throw new IllegalArgumentException("Invalid inputs...");
         }
     }
 
@@ -104,10 +105,10 @@ public class UserServiceImpl implements UserService {
             if (userRepo.existsByEmail(email)) {
                 return userRepo.deleteByEmail(email);
             } else {
-                throw new RuntimeException("User not found...");
+                throw new UserNotFoundException("User not found...");
             }
         } else {
-            throw new RuntimeException("Invalid inputs...");
+            throw new EntryNotFoundException("Invalid inputs...");
         }
     }
 

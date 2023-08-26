@@ -2,6 +2,9 @@ package com.example.ecommerceapi.service.impl;
 
 import com.example.ecommerceapi.dto.ProductDTO;
 import com.example.ecommerceapi.entity.Product;
+import com.example.ecommerceapi.exception.EntryDuplicateException;
+import com.example.ecommerceapi.exception.EntryNotFoundException;
+import com.example.ecommerceapi.exception.NotFoundException;
 import com.example.ecommerceapi.repo.ProductRepo;
 import com.example.ecommerceapi.service.ProductService;
 import org.modelmapper.ModelMapper;
@@ -35,10 +38,10 @@ public class ProductServiceImpl implements ProductService {
                 repo.save(mapper.map(productDTO,Product.class));
                 return true;
             }else{
-                throw new RuntimeException("Already exists...");
+                throw new EntryDuplicateException("Already exists...");
             }
         }else{
-            throw new RuntimeException("Invalid inputs...");
+            throw new IllegalArgumentException("Invalid inputs...");
         }
     }
 
@@ -58,10 +61,10 @@ public class ProductServiceImpl implements ProductService {
                 repo.save(product);
                 return true;
             }else{
-                throw new RuntimeException("Not found...");
+                throw new NotFoundException("Not found...");
             }
         }else{
-            throw new RuntimeException("Invalid inputs...");
+            throw new IllegalArgumentException("Invalid inputs...");
         }
     }
 
@@ -74,7 +77,7 @@ public class ProductServiceImpl implements ProductService {
                 throw new RuntimeException("Not found...");
             }
         }else{
-            throw new RuntimeException("Invalid inputs...");
+            throw new EntryNotFoundException("Invalid inputs...");
         }
     }
 
@@ -85,10 +88,10 @@ public class ProductServiceImpl implements ProductService {
             if(productOptional.isPresent()){
                 return mapper.map(productOptional.get(), ProductDTO.class);
             }else{
-                throw new RuntimeException("Not found...");
+                throw new NotFoundException("Not found...");
             }
         }else{
-            throw new RuntimeException("Invalid inputs...");
+            throw new EntryNotFoundException("Invalid inputs...");
         }
     }
 

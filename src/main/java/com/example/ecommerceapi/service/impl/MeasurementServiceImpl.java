@@ -2,6 +2,9 @@ package com.example.ecommerceapi.service.impl;
 
 import com.example.ecommerceapi.dto.MeasurementDTO;
 import com.example.ecommerceapi.entity.Measurement;
+import com.example.ecommerceapi.exception.EntryDuplicateException;
+import com.example.ecommerceapi.exception.EntryNotFoundException;
+import com.example.ecommerceapi.exception.NotFoundException;
 import com.example.ecommerceapi.repo.CustomerRepo;
 import com.example.ecommerceapi.repo.MeasurementRepo;
 import com.example.ecommerceapi.service.MeasurementService;
@@ -41,10 +44,10 @@ public class MeasurementServiceImpl implements MeasurementService {
                 repo.save(measurement);
                 return true;
             } else {
-                throw new RuntimeException("Already exists...");
+                throw new EntryDuplicateException("Already exists...");
             }
         } else {
-            throw new RuntimeException("Invalid inputs...");
+            throw new IllegalArgumentException("Invalid inputs...");
         }
     }
 
@@ -64,10 +67,10 @@ public class MeasurementServiceImpl implements MeasurementService {
                 repo.save(measurement);
                 return true;
             } else {
-                throw new RuntimeException("Not found...");
+                throw new NotFoundException("Not found...");
             }
         } else {
-            throw new RuntimeException("Invalid inputs...");
+            throw new IllegalArgumentException("Invalid inputs...");
         }
     }
 
@@ -79,10 +82,10 @@ public class MeasurementServiceImpl implements MeasurementService {
                 Measurement measurement = optionalMeasurement.get();
                 return mapper.map(measurement, MeasurementDTO.class);
             } else {
-                throw new RuntimeException("Not found...");
+                throw new NotFoundException("Not found...");
             }
         } else {
-            throw new RuntimeException("Invalid inputs...");
+            throw new EntryNotFoundException("Invalid inputs...");
         }
     }
 

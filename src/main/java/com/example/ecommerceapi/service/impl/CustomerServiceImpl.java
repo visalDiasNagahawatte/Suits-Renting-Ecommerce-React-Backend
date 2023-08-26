@@ -4,6 +4,9 @@ import com.example.ecommerceapi.dto.CustomerDTO;
 import com.example.ecommerceapi.dto.MeasurementDTO;
 import com.example.ecommerceapi.entity.Customer;
 import com.example.ecommerceapi.entity.Measurement;
+import com.example.ecommerceapi.exception.EntryDuplicateException;
+import com.example.ecommerceapi.exception.EntryNotFoundException;
+import com.example.ecommerceapi.exception.NotFoundException;
 import com.example.ecommerceapi.repo.CustomerRepo;
 import com.example.ecommerceapi.repo.MeasurementRepo;
 import com.example.ecommerceapi.service.CustomerService;
@@ -46,10 +49,10 @@ public class CustomerServiceImpl implements CustomerService {
                 measurementService.addMeasurement(customerDTO.getMeasurementDTO());
                 return true;
             } else {
-                throw new RuntimeException("Already exists...");
+                throw new EntryDuplicateException("Already exists...");
             }
         }else{
-            throw new RuntimeException("Invalid inputs...");
+            throw new IllegalArgumentException("Invalid inputs...");
         }
     }
 
@@ -68,10 +71,10 @@ public class CustomerServiceImpl implements CustomerService {
                 repo.save(customer);
                 return true;
             }else{
-                throw new RuntimeException("Not found...");
+                throw new NotFoundException("Not found...");
             }
         }else{
-            throw new RuntimeException("Invalid inputs...");
+            throw new IllegalArgumentException("Invalid inputs...");
         }
     }
 
@@ -82,10 +85,10 @@ public class CustomerServiceImpl implements CustomerService {
                 measurementRepo.deleteMeasurementsByCustomerNic(nic);
                 return repo.deleteByNic(nic);
             }else {
-                throw new RuntimeException("Not found...");
+                throw new NotFoundException("Not found...");
             }
         }else{
-            throw new RuntimeException("Invalid inputs...");
+            throw new EntryNotFoundException("Invalid inputs...");
         }
     }
 
@@ -99,10 +102,10 @@ public class CustomerServiceImpl implements CustomerService {
                 customerDTO.setMeasurementDTO(mapper.map(optionalMeasurement.get(), MeasurementDTO.class));
                 return customerDTO;
             } else {
-                throw new RuntimeException("Not found...");
+                throw new NotFoundException("Not found...");
             }
         }else{
-            throw new RuntimeException("Invalid inputs...");
+            throw new EntryNotFoundException("Invalid inputs...");
         }
     }
 

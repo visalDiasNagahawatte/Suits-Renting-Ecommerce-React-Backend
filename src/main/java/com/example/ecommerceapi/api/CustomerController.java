@@ -37,7 +37,7 @@ public class CustomerController {
     @DeleteMapping(params = {"nic"})
     public ResponseEntity<StandardResponse> deleteCustomer(@RequestParam String nic) {
         String s = service.deleteCustomer(nic);
-        return new ResponseEntity<>(new StandardResponse(203, "Success", s), HttpStatus.OK);
+        return new ResponseEntity<>(new StandardResponse(204, "Success", s), HttpStatus.OK);
     }
 
     @GetMapping(value = "/find", params = {"nic"})

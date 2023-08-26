@@ -4,6 +4,7 @@ import com.example.ecommerceapi.dto.CartDTO;
 import com.example.ecommerceapi.dto.LineItemDTO;
 import com.example.ecommerceapi.dto.ProductDTO;
 import com.example.ecommerceapi.entity.Cart;
+import com.example.ecommerceapi.exception.EntryNotFoundException;
 import com.example.ecommerceapi.repo.CartRepo;
 import com.example.ecommerceapi.repo.OrderRepo;
 import com.example.ecommerceapi.service.CartService;
@@ -55,10 +56,10 @@ public class CartServiceImpl implements CartService {
                 }
                 return true;
             } else {
-                throw new RuntimeException("Invalid line items...");
+                throw new EntryNotFoundException("Invalid Line Items...");
             }
         } else {
-            throw new RuntimeException("Invalid inputs...");
+            throw new IllegalArgumentException("Invalid Inputs...");
         }
     }
 }

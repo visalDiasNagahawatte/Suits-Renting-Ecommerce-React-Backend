@@ -31,7 +31,7 @@ public class UserController {
     @PostMapping(value = "/login", params = {"email", "password"})
     public ResponseEntity<StandardResponse> loginAuth(@RequestParam String email, @RequestParam String password) {
         boolean b = userService.loginAuth(email, password);
-        return new ResponseEntity<StandardResponse>(new StandardResponse(201, "Success...",b),HttpStatus.CREATED);
+        return new ResponseEntity<StandardResponse>(new StandardResponse(200, "Success...", b), HttpStatus.CREATED);
     }
 
     @GetMapping(value = "/find", params = {"email"})
@@ -49,7 +49,7 @@ public class UserController {
     @DeleteMapping(params = {"email"})
     public ResponseEntity<StandardResponse> deleteUser(@RequestParam String email){
         String s = userService.deleteUser(email);
-        return new ResponseEntity<StandardResponse>(new StandardResponse(203, "Success...",s),HttpStatus.OK);
+        return new ResponseEntity<StandardResponse>(new StandardResponse(204, "Success...", s), HttpStatus.OK);
     }
 
     @GetMapping

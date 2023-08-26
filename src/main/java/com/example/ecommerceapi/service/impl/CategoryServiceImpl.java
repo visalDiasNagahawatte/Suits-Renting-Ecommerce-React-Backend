@@ -2,6 +2,9 @@ package com.example.ecommerceapi.service.impl;
 
 import com.example.ecommerceapi.dto.CategoryDTO;
 import com.example.ecommerceapi.entity.Category;
+import com.example.ecommerceapi.exception.EntryDuplicateException;
+import com.example.ecommerceapi.exception.EntryNotFoundException;
+import com.example.ecommerceapi.exception.NotFoundException;
 import com.example.ecommerceapi.repo.CategoryRepo;
 import com.example.ecommerceapi.service.CategoryService;
 import org.modelmapper.ModelMapper;
@@ -35,10 +38,10 @@ public class CategoryServiceImpl implements CategoryService {
                 repo.save(mapper.map(categoryDTO, Category.class));
                 return true;
             }else{
-                throw new RuntimeException("Already exists...");
+                throw new EntryDuplicateException("Already exists...");
             }
         }else {
-            throw new RuntimeException("Invalid inputs...");
+            throw new IllegalArgumentException("Invalid inputs...");
         }
     }
 
@@ -52,10 +55,10 @@ public class CategoryServiceImpl implements CategoryService {
                 repo.save(category);
                 return true;
             }else{
-                throw new RuntimeException("Not found...");
+                throw new NotFoundException("Not found...");
             }
         }else{
-            throw new RuntimeException("Invalid inputs...");
+            throw new IllegalArgumentException("Invalid inputs...");
         }
     }
 
@@ -65,10 +68,10 @@ public class CategoryServiceImpl implements CategoryService {
             if(repo.existsByDescription(description)){
                 return repo.deleteByDescription(description);
             }else{
-                throw new RuntimeException("Not found...");
+                throw new NotFoundException("Not found...");
             }
         }else{
-            throw new RuntimeException("Invalid inputs...");
+            throw new EntryNotFoundException("Invalid inputs...");
         }
     }
 
@@ -79,10 +82,10 @@ public class CategoryServiceImpl implements CategoryService {
             if(categoryOptional.isPresent()){
                 return mapper.map(categoryOptional.get(), CategoryDTO.class);
             }else{
-                throw new RuntimeException("Not found...");
+                throw new NotFoundException("Not found...");
             }
         }else{
-            throw new RuntimeException("Invalid inputs...");
+            throw new EntryNotFoundException("Invalid inputs...");
         }
     }
 

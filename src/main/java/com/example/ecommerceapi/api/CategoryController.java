@@ -37,7 +37,7 @@ public class CategoryController {
     @DeleteMapping(params = {"description"})
     public ResponseEntity<StandardResponse> deleteCategory(@RequestParam String description) {
         String s = service.deleteCategory(description);
-        return new ResponseEntity<>(new StandardResponse(203, "Success", s), HttpStatus.OK);
+        return new ResponseEntity<>(new StandardResponse(204, "Success", s), HttpStatus.OK);
     }
 
     @GetMapping(value = "/find", params = {"description"})
