@@ -16,6 +16,7 @@ public class LineItemDTO {
     private int quantity;
     private double totalPrice;
     private Long orderId;
+    //    private Long productId;
     private Long cartId;
     private ProductDTO productDTO;
 }
